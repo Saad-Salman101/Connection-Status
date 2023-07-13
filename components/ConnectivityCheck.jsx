@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ConnectivityCheck = () => {
   const [prevEffectiveType, setPrevEffectiveType] = useState('');
-  const [isOnline, setIsOnline] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
     setIsOnline(navigator.onLine);
