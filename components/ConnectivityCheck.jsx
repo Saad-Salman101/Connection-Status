@@ -29,10 +29,7 @@ const ConnectivityCheck = () => {
   useEffect(() => {
     if (isOnline && typeof navigator !== 'undefined' && navigator.connection) {
       const connection = navigator.connection;
-
-      // Check if the effectiveType property is supported
-      if (connection.effectiveType) {
-        // Check the effectiveType value to determine the connection quality
+      connection.onchange = () => {
         const currentEffectiveType = connection.effectiveType;
 
         if (prevEffectiveType !== currentEffectiveType) {
@@ -40,25 +37,17 @@ const ConnectivityCheck = () => {
 
           if (currentEffectiveType === 'slow-2g' || currentEffectiveType === '2g') {
             toast.error('Poor connectivity');
-            console.log(currentEffectiveType);
-            console.log('Poor connectivity');
           } else if (currentEffectiveType === 'slow-3g' || currentEffectiveType === '3g') {
             toast.warning('Moderate connectivity');
-            console.log(currentEffectiveType);
-            console.log('Moderate connectivity');
-          } else {
+          } else if (currentEffectiveType === 'offline' || currentEffectiveType === 'offline') {
             toast.success('Good connectivity');
-            console.log(currentEffectiveType);
-            console.log('Good connectivity');
+          }
+          else {
+            toast.error('offline');
           }
         }
-      } else {
-        // The effectiveType property is not supported, fallback to other methods
-        // You can use other approaches like measuring network latency or throughput to determine connectivity quality
-      }
+      };
     } else {
-      console.log('Offline');
-      toast.error('Offline')
       // Handle offline status
     }
   }, [isOnline, prevEffectiveType]);
