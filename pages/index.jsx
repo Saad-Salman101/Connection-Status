@@ -15,7 +15,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <NetworkStatus/>
+        {/* <NetworkStatus/> */}
         <ConnectivityCheck/>
         <h1 className="text-xl lg:text-6xl text-center my-10 uppercase tracking-[2px]">
           Hello {value}
